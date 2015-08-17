@@ -1,6 +1,7 @@
 package kr.ac.snu.ads.facetracking;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import intel.rssdk.PXCMFaceConfiguration;
@@ -13,6 +14,8 @@ import intel.rssdk.pxcmStatus;
 
 public class FaceCounter implements FaceDetectingRunnerInterface {
 	private int nFaces = 0; 
+	private VieweesRepository repo = new VieweesRepository();
+	
 	public void run() {
         PXCMSenseManager senseMgr = PXCMSenseManager.CreateInstance();
         
@@ -45,16 +48,16 @@ public class FaceCounter implements FaceDetectingRunnerInterface {
         	int nfaces = fdata.QueryNumberOfDetectedFaces();
         	        	
         	if (nfaces != this.nFaces) {
-        		for (int i = 0; i < nfaces; i++) {
-        			Face face = fdata.QueryFaceByIndex(i);
-        			RecognitionData rdata = face.QueryRecognition();
-                	
-        			int userId = face.QueryUserID();
-                	
-                	System.out.println("User ID: " + userId);
-        		}
-        		String timeStamp = new SimpleDateFormat("yyyy-MM-dd.HH:mm:ss").format(new Date());
-            	System.out.println(nfaces + " faces detected at " + timeStamp);
+        		ArrayList<Integer> userIdList = getUserIdList(fdata);
+        		
+        		repo.update(userIdList);
+        		repo.printStatus();
+        		//String timeStamp = new SimpleDateFormat("yyyy-MM-dd.HH:mm:ss").format(new Date());
+            	//System.out.println(nfaces + " faces detected at " + timeStamp);
+            	
+            	//String idString = getIdListString(userIdList);
+            	//System.out.println("user IDs: " + idString);
+            	
         		this.nFaces = nfaces;
         	}        	
         	
@@ -64,5 +67,30 @@ public class FaceCounter implements FaceDetectingRunnerInterface {
         }
         fdata.close();
         
+	}
+
+	private String getIdListString(ArrayList<Integer> userIdList) {
+		String idString = "";
+		for (int i = 0; i < userIdList.size(); i++) {
+			if (i != 0) {
+				idString += ", ";
+			}
+			int userId = userIdList.get(i);
+			idString += userId;
+		}
+		return idString;
+	}
+
+	private ArrayList<Integer> getUserIdList(PXCMFaceData fdata) {
+		int nfaces = fdata.QueryNumberOfDetectedFaces();
+		ArrayList<Integer> userIdList = new ArrayList<Integer>();        		        		
+		for (int i = 0; i < nfaces; i++) {
+			Face face = fdata.QueryFaceByIndex(i);
+			RecognitionData rdata = face.QueryRecognition();
+			
+			int userId = face.QueryUserID();
+			userIdList.add(userId);                	
+		}
+		return userIdList;
 	}
 } 
