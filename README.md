@@ -6,4 +6,4 @@ TO BE CONSTRUCTED.
 
 ## HISTORY
  - 2015-8-17:
-   - This is a simple face counting application on console. each user's IDs is shown with the number of faces.  
+   - This is a simple face counting application on console. each user's IDs is shown with the appropriate timestamp.  
