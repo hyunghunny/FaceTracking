@@ -41,25 +41,25 @@ public class UserPresence {
 		this.state = PresenceState.JOINED;
 	}
 	
-	public String getJoinedTimestamp() {
-		String timeStamp = new SimpleDateFormat("HH:mm:ss").format(dateJoined);
-		return timeStamp;
+	public Date getJoinedDate() {
+		return this.dateJoined;		
 	}
 	
-	public String getLeavedTimestamp() {
-		String timeStamp = "";
-		if (this.dateLeaved != null) {
-			timeStamp = new SimpleDateFormat("HH:mm:ss").format(dateLeaved);
-		}
+	public Date getLeavedDate() {
 		
-		return timeStamp;		
+		return this.dateLeaved;		
+	}
+	
+	private String toSimpleTimestamp(Date time) {
+		String timeStamp = new SimpleDateFormat("HH:mm:ss").format(time);
+		return timeStamp;
 	}
 	
 	public void printStatus() {
 		String status = "";
-		status = this.userId + " joined at " + this.getJoinedTimestamp();
+		status = this.userId + " joined at " + this.toSimpleTimestamp(this.dateJoined);
 		if (state == PresenceState.LEAVED) {
-			status += ", leaved at " + this.getLeavedTimestamp();
+			status += ", leaved at " + this.toSimpleTimestamp(this.dateLeaved);
 		}
 		System.out.println(status);
 	}
