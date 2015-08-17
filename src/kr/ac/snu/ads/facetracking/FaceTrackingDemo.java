@@ -1,4 +1,5 @@
 package kr.ac.snu.ads.facetracking;
+
 /*******************************************************************************
 
 INTEL CORPORATION PROPRIETARY INFORMATION
@@ -9,17 +10,17 @@ Copyright(c) 2014 Intel Corporation. All Rights Reserved.
 
 *******************************************************************************/
 
-import intel.rssdk.*;
-import java.lang.System.*;
-import java.util.*;
-import javax.swing.*;
-import java.awt.event.*;
-import java.awt.image.*;
-import java.awt.*;
+import intel.rssdk.PXCMCapture;
+import intel.rssdk.PXCMFaceConfiguration;
+import intel.rssdk.PXCMFaceData;
+import intel.rssdk.PXCMFaceModule;
+import intel.rssdk.PXCMRectI32;
+import intel.rssdk.PXCMSenseManager;
+import intel.rssdk.pxcmStatus;
 
-public class FaceTracking {
-    public static void main(String s[]) throws java.io.IOException
-    {
+public class FaceTrackingDemo implements FaceDetectorInterface {
+	
+	public void run() {
         PXCMSenseManager senseMgr = PXCMSenseManager.CreateInstance();
         
         senseMgr.EnableFace(null);
@@ -65,8 +66,9 @@ public class FaceTracking {
                         System.out.println ("Top Left corner: (" + rect.x + "," + rect.y + ")" ); 
                         System.out.println ("Height: " + rect.h + " Width: " + rect.w); 
                     }
-                } else 
+                } else {
                     break;
+                }
                 
                 PXCMFaceData.PoseData poseData = face.QueryPose();
                 if (poseData != null)
@@ -82,7 +84,7 @@ public class FaceTracking {
             senseMgr.ReleaseFrame();
         }
         
-        senseMgr.Close();
-        System.exit(0);
-    } 
+        senseMgr.Close();		
+	}
+
 }
