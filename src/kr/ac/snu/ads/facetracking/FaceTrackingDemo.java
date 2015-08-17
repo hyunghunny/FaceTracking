@@ -18,7 +18,7 @@ import intel.rssdk.PXCMRectI32;
 import intel.rssdk.PXCMSenseManager;
 import intel.rssdk.pxcmStatus;
 
-public class FaceTrackingDemo implements FaceDetectorInterface {
+public class FaceTrackingDemo implements FaceDetectingRunnerInterface {
 	
 	public void run() {
         PXCMSenseManager senseMgr = PXCMSenseManager.CreateInstance();

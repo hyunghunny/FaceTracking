@@ -1,5 +1,5 @@
 package kr.ac.snu.ads.facetracking;
 
-public interface FaceDetectorInterface {
+public interface FaceDetectingRunnerInterface {
 	public void run();
 }

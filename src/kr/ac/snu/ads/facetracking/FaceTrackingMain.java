@@ -10,7 +10,7 @@ import java.awt.*;
 public class FaceTrackingMain {
     public static void main(String s[]) throws java.io.IOException
     {
-    	FaceDetectorInterface detector =  new FaceCounter(); //new FaceTrackingDemo();
+    	FaceDetectingRunnerInterface detector =  new FaceCounter(); //new FaceTrackingDemo();
     	detector.run();
         System.exit(0);
     } 

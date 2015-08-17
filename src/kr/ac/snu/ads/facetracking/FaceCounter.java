@@ -10,9 +10,8 @@ import intel.rssdk.PXCMFaceData.RecognitionData;
 import intel.rssdk.PXCMFaceModule;
 import intel.rssdk.PXCMSenseManager;
 import intel.rssdk.pxcmStatus;
-import intel.rssdk.PXCMFaceConfiguration.RecognitionConfiguration;
 
-public class FaceCounter implements FaceDetectorInterface {
+public class FaceCounter implements FaceDetectingRunnerInterface {
 	private int nFaces = 0; 
 	public void run() {
         PXCMSenseManager senseMgr = PXCMSenseManager.CreateInstance();
@@ -30,9 +29,6 @@ public class FaceCounter implements FaceDetectorInterface {
         //faceConfig.landmarks.isEnabled = true; 
         //faceConfig.pose.isEnabled = true;
         
-        // Configure face recognition        
-        //RecognitionConfiguration rcfg = faceConfig.QueryRecognition();
-        //rcfg.Enable();
         
         faceConfig.ApplyChanges();
         faceConfig.Update();
