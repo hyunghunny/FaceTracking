@@ -57,7 +57,7 @@ public class UserPresence {
 	
 	public void printStatus() {
 		String status = "";
-		status = this.userId + " joined at " + this.toSimpleTimestamp(this.dateJoined);
+		status = "User " + this.userId + " joined at " + this.toSimpleTimestamp(this.dateJoined);
 		if (state == PresenceState.LEAVED) {
 			status += ", leaved at " + this.toSimpleTimestamp(this.dateLeaved);
 		}
