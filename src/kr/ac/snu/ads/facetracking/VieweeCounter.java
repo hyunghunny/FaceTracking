@@ -56,6 +56,7 @@ public class VieweeCounter implements FaceDetectingRunnerInterface {
         		if (repo != null) {
             		repo.update(userIdList);
             		repo.printStatus();
+            		repo.save();
         		} else {
             		String timeStamp = new SimpleDateFormat("yyyy-MM-dd.HH:mm:ss").format(new Date());
                 	System.out.println(nfaces + " faces detected at " + timeStamp);

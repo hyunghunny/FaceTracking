@@ -26,12 +26,7 @@ public class FaceDetectingDB  {
 		    		" (id INT, " +
 		    		" joined DATETIME, leaved DATETIME)";
 		    int nRet = statement.executeUpdate(query);
-		    if (nRet > 0) {
-		    	return true;
-		    } else {
-		    	System.out.println("Create table failed");
-		    	return false;
-		    }
+		    return true;
 		    
 		} catch (SQLException ex) {
 			ex.printStackTrace();
