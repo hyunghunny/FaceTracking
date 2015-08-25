@@ -12,9 +12,13 @@ import intel.rssdk.PXCMFaceModule;
 import intel.rssdk.PXCMSenseManager;
 import intel.rssdk.pxcmStatus;
 
-public class FaceCounter implements FaceDetectingRunnerInterface {
+public class VieweeCounter implements FaceDetectingRunnerInterface {
 	private int nFaces = 0; 
-	private VieweesRepository repo = new VieweesRepository();
+	private VieweesRepository repo = null;
+	
+	public void setRepository (VieweesRepository repo) {
+		this.repo = repo;
+	}
 	
 	public void run() {
         PXCMSenseManager senseMgr = PXCMSenseManager.CreateInstance();
@@ -49,14 +53,17 @@ public class FaceCounter implements FaceDetectingRunnerInterface {
         	        	
         	if (nfaces != this.nFaces) {
         		ArrayList<Integer> userIdList = getUserIdList(fdata);
-        		
-        		repo.update(userIdList);
-        		repo.printStatus();
-        		//String timeStamp = new SimpleDateFormat("yyyy-MM-dd.HH:mm:ss").format(new Date());
-            	//System.out.println(nfaces + " faces detected at " + timeStamp);
-            	
-            	//String idString = getIdListString(userIdList);
-            	//System.out.println("user IDs: " + idString);
+        		if (repo != null) {
+            		repo.update(userIdList);
+            		repo.printStatus();
+        		} else {
+            		String timeStamp = new SimpleDateFormat("yyyy-MM-dd.HH:mm:ss").format(new Date());
+                	System.out.println(nfaces + " faces detected at " + timeStamp);
+                	
+                	String idString = getIdListString(userIdList);
+                	System.out.println("user IDs: " + idString);       			
+        		}
+
             	
         		this.nFaces = nfaces;
         	}        	

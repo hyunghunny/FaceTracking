@@ -7,9 +7,11 @@ import java.util.HashMap;
 
 public class VieweesRepository {
 	HashMap<Integer, UserPresence> viewees = null;
+	private String groupName = null;
 	
-	public VieweesRepository() {
+	public VieweesRepository(String groupName) {
 		this.viewees = new HashMap<>();
+		this.groupName = groupName;
 	}
 	
 	public void update(ArrayList<Integer> idList) {

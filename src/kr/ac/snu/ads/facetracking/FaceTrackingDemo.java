@@ -87,4 +87,10 @@ public class FaceTrackingDemo implements FaceDetectingRunnerInterface {
         senseMgr.Close();		
 	}
 
+	@Override
+	public void setRepository(VieweesRepository repo) {
+		// XXX: DO NOTHING
+		
+	}
+
 }
